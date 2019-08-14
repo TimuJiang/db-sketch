@@ -1,12 +1,14 @@
 <template lang='pug'>
-	.index
+	.left-tool
 </template>
 
 <script>
 	export default {
-		name: 'index'
+		name: 'left-tool'
 	}
 </script>
 <style lang="scss" scoped>
+	.left-tool {
 
+	}
 </style>

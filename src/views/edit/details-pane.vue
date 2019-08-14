@@ -1,10 +1,10 @@
 <template lang='pug'>
-	.index
+	.details-pane
 </template>
 
 <script>
 	export default {
-		name: 'index'
+		name: 'details-pane'
 	}
 </script>
 <style lang="scss" scoped>
