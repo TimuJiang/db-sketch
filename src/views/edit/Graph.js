@@ -1,22 +1,10 @@
 import G6 from '@antv/g6'
 
-G6.registerNode('table', {
-	drawShape: function drawShape(cfg, group) {
-		return group.addShape('rect', {
-			attrs: {
-				x: -75,
-				y: -25,
-				width: 240,
-				height: 50,
-				radius: 8,
-				stroke: '#00C0A5',
-				fill: '#92949F',
-				fillOpacity: 0.45,
-				lineWidth: 1
-			}
-		})
-	}
-}, 'single-shape')
+// import table from './base/table-shape'
+import tableConfig from './base/table-config'
+
+// G6.registerNode('table', table, 'single-shape')
+G6.registerNode('table', tableConfig, 'single-shape')
 
 export default class Graph {
 	// eslint-disable-next-line no-useless-constructor
@@ -37,8 +25,7 @@ export default class Graph {
 				}
 			},
 			defaultEdge: {},
-			minZoom: 1,
-			maxZoom: 1,
+			pixeRatio: 2,
 			modes: {
 				default: [
 					{
@@ -50,6 +37,7 @@ export default class Graph {
 			}
 		})
 	}
+
 	updateData(data) {
 		this.graph.data(data)
 		this.graph.render()
