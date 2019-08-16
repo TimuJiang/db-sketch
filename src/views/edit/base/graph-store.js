@@ -1,4 +1,4 @@
-import Graph from './Graph'
+import Graph from './graph.js'
 let instance = ''
 export default class GraphStore {
 	// eslint-disable-next-line no-useless-constructor
@@ -9,11 +9,8 @@ export default class GraphStore {
 		if (!instance) instance = new GraphStore()
 		return instance
 	}
-	init(id, w, h) {
-		this.graph = new Graph(id, w, h)
+	init(id) {
+		this.graph = new Graph(id)
 	}
 
-	updateData (data) {
-		this.graph.updateData(data)
-	}
 }
