@@ -3,8 +3,7 @@
 </template>
 
 <script>
-	import Graph from './Graph'
-
+	import GraphStore from './GraphStore'
 	export default {
 		name: 'g6-graph',
 		props: {
@@ -18,52 +17,26 @@
 			this.nodes = [
 				{
 					id: 1,
-					x: 100,
-					y: 100,
-					label: 'rect'
+					x: 200,
+					y: 200,
+					label: 'Employee',
+					remark: '员工基础表'
 				}, {
 					id: 2,
-					x: 200,
-					y: 100,
-					label: 'rect'
-				}, {
-					id: 3,
-					x: 300,
-					y: 100,
-					label: 'rect'
-				}, {
-					id: 4,
-					x: 400,
-					y: 100,
-					label: 'rect'
+					x: 600,
+					y: 600,
+					label: 'Employee'
 				}
 			]
 			this.edges = [
-				{
-					source: '1',
-					target: '2',
-					shape: 'line',
-					label: '左关联'
-				}, {
-					source: '1',
-					target: '3',
-					shape: 'line',
-					label: '左关联'
-				}, {
-					source: '1',
-					target: '4',
-					shape: 'line',
-					label: '左关联'
-				}
+				{source: '1', target: '2', shape: 'cubic'}
 			]
 		},
 		mounted() {
 			let w = this.$el.clientWidth
 			let h = this.$el.clientHeight
-			console.log(w)
-			console.log(h)
-			this.graph = new Graph('g6-graph', w, h)
-			this.graph.updateData({
+			GraphStore.getInstance().init('g6-graph', w, h)
+			GraphStore.getInstance().updateData({
 				nodes: this.nodes,
 				edges: this.edges
 			})

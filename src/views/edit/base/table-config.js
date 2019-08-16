@@ -1,36 +1,69 @@
+const H = 60
+const W = 240
+const H2 = H/2
+const W2 = W/2
+const CONFIG = {
+	basicColor: '#722ED1',
+	fontColor: '#722ED1',
+	borderColor: '#722ED1',
+	bgColor: '#F6EDFC'
+}
 export default {
 	draw(cfg, group) {
-		const circle = group.addShape('rect', {
+		const container = group.addShape('rect', {
 			attrs: {
-				x: -120,
-				y: -25,
-				width: 240,
-				height: 50,
-				radius: 0,
-				stroke: '#00C0A5',
-				fill: '#92949F',
+				x: -W2,
+				y: -H2,
+				width: W,
+				height: H,
+				radius: 2,
+				stroke: CONFIG.borderColor,
+				fill: CONFIG.bgColor,
 				fillOpacity: 0.45,
 				lineWidth: 1
 			}
 		})
-		const text = group.addShape('text', {
+		group.addShape('rect', {
 			attrs: {
-				x: 0,
-				y: 0,
-				textAlign: 'center',
-				text: cfg.label,
-				fill: '#444'
+				x: -W2,
+				y: -H2,
+				width: 3,
+				height: H,
+				radius: 2,
+				fill: CONFIG.borderColor
 			}
 		})
 		group.addShape('text', {
 			attrs: {
-				x: 0,
-				y: 20,
-				textAlign: 'center',
+				x: -W2 + 10,
+				y: -H2 + 20,
 				text: cfg.label,
-				fill: '#444'
+				fontSize: 14,
+				textAlign: 'left',
+				textBaseline: 'middle',
+				fontWeight: 'bold',
+				fill: CONFIG.fontColor
 			}
 		})
-		return circle
+		group.addShape('text', {
+			attrs: {
+				x: -W2 + 10,
+				y: 15,
+				text: cfg.remark,
+				fontSize: 12,
+				textAlign: 'left',
+				textBaseline: 'middle',
+				fill: CONFIG.fontColor
+			}
+		})
+		group.addShape('circle', {
+			attrs: {
+				x: -W2 + 1,
+				y: H / 2 - H2,
+				r: 6,
+				fill: CONFIG.basicColor
+			}
+		})
+		return container
 	}
 }

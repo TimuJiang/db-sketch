@@ -4,7 +4,7 @@ import G6 from '@antv/g6'
 import tableConfig from './base/table-config'
 
 // G6.registerNode('table', table, 'single-shape')
-G6.registerNode('table', tableConfig, 'single-shape')
+G6.registerNode('table', tableConfig)
 
 export default class Graph {
 	// eslint-disable-next-line no-useless-constructor
@@ -19,8 +19,7 @@ export default class Graph {
 				labelCfg: {
 					style: {
 						fill: '#666',
-						fontSize: 14,
-						fontWeight: 'bold'
+						fontSize: 14
 					}
 				}
 			},
