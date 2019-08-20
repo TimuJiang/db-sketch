@@ -3,12 +3,25 @@
 		.db-table_title
 			span 我得表格
 		.db-table_content
+			db-field(v-for="field,index in node.fields" :key="index" :field="field")
 </template>
 
 <script>
+	import DbField from './db-field'
 	export default {
 		name: 'db-table',
-		props: [ 'node' ]
+		props: [ 'node' ],
+		components: { DbField },
+		data() {
+			return {
+				draggable: false
+			}
+		},
+		methods: {
+			onSetMove(type) {
+
+			}
+		}
 	}
 </script>
 <style lang="scss" scoped>

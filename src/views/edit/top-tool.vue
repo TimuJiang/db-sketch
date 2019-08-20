@@ -1,6 +1,6 @@
 <template lang='pug'>
 	.top-tool
-		menu-item(label="新增表" @click.native="onChange")
+		menu-item(label="新增表" @click.native="onChange(1)")
 
 </template>
 
@@ -10,7 +10,8 @@
 		name: 'top-tool',
 		components: {MenuItem},
 		methods: {
-			onChange () {
+			onChange (type) {
+				this.$emit('edit-new')
 			}
 		}
 	}
