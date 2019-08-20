@@ -7,7 +7,7 @@ export default class Table {
 		this.y = 100
 		this.fields = [
 			{
-				key: 'f-1221',
+				id: 'f-1221',
 				name: 'id',
 				type: 'String',
 				remark: '--'

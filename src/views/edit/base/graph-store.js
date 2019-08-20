@@ -28,4 +28,13 @@ export default class GraphStore {
 	setDraggable(id) {
 		this.$graph.setDraggable(id)
 	}
+	initTable($el, id) {
+		this.$graph.addGroup($el, id)
+	}
+	addToTable(tableId, id) {
+		this.$graph.addToGroup(tableId, id)
+	}
+	makeSource($el) {
+		this.$graph.makeSource($el)
+	}
 }

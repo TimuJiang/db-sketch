@@ -19,20 +19,39 @@ export default class Graph {
 			HoverPaintStyle: { stroke: '#ec9f2e' },
 			EndpointHoverStyle: { fill: '#ec9f2e' }
 		})
-		// this.graph.draggable('node-1')
-		// this.graph.draggable('node-2')
-		// this.graph.connect({
-		// 	source: 'node-1',
-		// 	target: 'node-2',
-		// 	anchor: ['Left', 'Right']
-		// })
-	}
-	connect(data) {
 	}
 	setDraggable(id) {
 		this.graph.draggable(id)
 	}
-	unsetDraggable(id) {
-		this.graph.removeFromDragSelection(id)
+	makeSource($el) {
+		this.graph.makeSource($el, {
+			anchor: ['Perimeter', { shape: 'Rectangle' }],
+			connectorStyle: {
+				stroke: '#5c96bc',
+				strokeWidth: 2,
+				outlineStroke: 'transparent',
+				outlineWidth: 4
+			},
+			extract: {
+				action: 'the-action'
+			},
+			maxConnections: -1,
+			onMaxConnections: function (info, e) {
+				alert('Maximum connections (' + info.maxConnections + ') reached')
+			}
+		})
+	}
+	addToGroup(tableId, id) {
+		this.graph.addToGroup(tableId, id)
+	}
+	addGroup ($el, id) {
+		this.graph.addGroup({
+			el: $el,
+			id: id,
+			constrain: true,
+			anchor: 'Continuous',
+			droppable: false,
+			endpoint: ['Dot', {radius: 3}]
+		})
 	}
 }

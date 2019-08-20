@@ -1,12 +1,38 @@
 <template lang='pug'>
-	.db-field
+	.db-field(:id="field.id")
+		span.name {{field.name}}
+		span.type {{field.type}}
 </template>
 
 <script>
 	export default {
-		name: 'db-field'
+		name: 'db-field',
+		props: {
+			field: {
+				type: Object,
+				default: function () {
+					return {}
+				}
+			}
+		},
+		mounted() {
+		}
 	}
 </script>
 <style lang="scss" scoped>
-
+	.db-field {
+		padding: 0 5px;
+		height: 30px;
+		line-height: 30px;
+		color: rgba(0,0,0, 0.6);
+		display: flex;
+		.name {
+			width: 50%;
+			font-size: 12px;
+			font-weight: 600;
+		}
+		.type {
+			width: 50%;
+		}
+	}
 </style>
