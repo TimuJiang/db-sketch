@@ -37,4 +37,7 @@ export default class GraphStore {
 	makeSource($el) {
 		this.$graph.makeSource($el)
 	}
+	makeTarget($el) {
+		this.$graph.makeSource($el)
+	}
 }

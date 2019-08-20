@@ -27,6 +27,7 @@
 					let el = document.querySelector(`#${field.id}`)
 					GraphStore.getInstance().addToTable(this.node.id, el)
 					GraphStore.getInstance().makeSource(el)
+					GraphStore.getInstance().makeTarget(el)
 				})
 			})
 		},

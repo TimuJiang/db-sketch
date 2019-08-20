@@ -41,6 +41,14 @@ export default class Graph {
 			}
 		})
 	}
+	makeTarget ($el) {
+		this.graph.makeTarget($el, {
+			dropOptions: { hoverClass: 'dragHover' },
+			anchor: ['Perimeter', { shape: 'Rectangle' }],
+			allowLoopback: false
+		})
+	}
+
 	addToGroup(tableId, id) {
 		this.graph.addToGroup(tableId, id)
 	}

@@ -10,6 +10,7 @@
 			el-container
 				el-main
 					graph.edit-graph(:table="table")
+		create-table-dialog(:show="true")
 </template>
 
 <script>
@@ -17,9 +18,10 @@
 	import TopTool from './edit/top-tool'
 	import LeftTool from './edit/left-tool'
 	import GraphStore from './edit/base/graph-store'
+	import CreateTableDialog from './edit/create-table-dialog'
 	export default {
 		name: 'edit',
-		components: {Graph, TopTool, LeftTool},
+		components: {Graph, TopTool, LeftTool, CreateTableDialog},
 		data() {
 			return {
 				table: []
