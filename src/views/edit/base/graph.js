@@ -1,17 +1,10 @@
-import {Biltong, Katavorio, Mottle, jsBezier, jsPlumb, jsPlumbUtil} from 'jsplumb'
-
-// console.log(Biltong)
-// console.log(Katavorio)
-// console.log(Mottle)
-// console.log(jsBezier)
-// console.log(jsPlumb)
-// console.log(jsPlumbUtil)
-
+import { jsPlumb } from 'jsplumb'
+const baseStyle = {}
 export default class Graph {
 	// eslint-disable-next-line no-useless-constructor
-	constructor(container) {
+	constructor(id) {
 		this.graph = jsPlumb.getInstance({
-			container: 'container',
+			Container: id,
 			Connector: ['Bezier', { curviness: 50 }],
 			DragOptions: { cursor: 'pointer', zIndex: 2000 },
 			PaintStyle: { stroke: 'gray', strokeWidth: 2 },
@@ -21,24 +14,13 @@ export default class Graph {
 		})
 	}
 	setDraggable(id) {
-		this.graph.draggable(id)
+		this.graph.draggable(id,  {
+			containment: 'parent'
+		})
 	}
 	makeSource($el) {
 		this.graph.makeSource($el, {
-			anchor: ['Perimeter', { shape: 'Rectangle' }],
-			connectorStyle: {
-				stroke: '#5c96bc',
-				strokeWidth: 2,
-				outlineStroke: 'transparent',
-				outlineWidth: 4
-			},
-			extract: {
-				action: 'the-action'
-			},
-			maxConnections: -1,
-			onMaxConnections: function (info, e) {
-				alert('Maximum connections (' + info.maxConnections + ') reached')
-			}
+			anchor: ['Perimeter', { shape: 'Rectangle' }]
 		})
 	}
 	makeTarget ($el) {
@@ -48,15 +30,22 @@ export default class Graph {
 			allowLoopback: false
 		})
 	}
-
 	addEndpoint($el) {
 		this.graph.addEndpoint($el, {
+			...baseStyle,
 			isSource: true,
-			anchor: 'RightMiddle'
+			isTarget: true,
+			maxConnections: -1,
+			anchors: 'Right',
+			uuid: $el + '-right'
+
 		})
 		this.graph.addEndpoint($el, {
+			...baseStyle,
+			isSource: true,
 			isTarget: true,
-			anchor: 'LeftMiddle'
+			anchors: 'Left',
+			uuid: $el + '-left'
 		})
 	}
 
@@ -67,8 +56,6 @@ export default class Graph {
 		this.graph.addGroup({
 			el: $el,
 			id: id
-			// droppable: false,
-			// constrain: true
 		})
 	}
 }

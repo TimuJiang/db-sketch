@@ -8,6 +8,7 @@ export default class Table {
 		this.y = options.y || 0
 		this.fields = []
 		this.createField('id', 'String')
+		this.createField('name', 'String')
 	}
 	createField(name, type, remark) {
 		let index = this.fields.length + 1

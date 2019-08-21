@@ -26,7 +26,9 @@
 
 		},
 		mounted() {
-			GraphStore.getInstance().init('graph')
+		    this.$nextTick(() => {
+                GraphStore.getInstance().init(this.$el)
+			})
 		}
 	}
 </script>

@@ -1,10 +1,10 @@
 <template lang='pug'>
-	.db-table(:id="node.id" :style="{left: `${node.x}px`, top: `${node.y}px`}")
+	.db-table(:id="node.id")
 		.db-table_title
 			.name {{ node.label }}
 			.toolbar
 				i.icon-button.el-icon-edit-outline
-		.db-table_content
+		ul.db-table_content
 			db-field(v-for="field,index in node.fields" :key="index" :field="field")
 </template>
 
@@ -22,13 +22,13 @@
 		},
 		mounted() {
 			this.$nextTick(() => {
-				GraphStore.getInstance().initTable(this.$el, this.node.id)
-				this.node.fields.forEach(field => {
-					let el = document.querySelector(`#${field.id}`)
-					GraphStore.getInstance().addToTable(this.node.id, el)
-					GraphStore.getInstance().initFieldNode(el)
+				// GraphStore.getInstance().initTable(this.$el, `g-${this.node.id}`)
+                this.node.fields.forEach(field => {
+                    GraphStore.getInstance().addEndpoint(field.id)
+					// GraphStore.getInstance().addToTable(`g-${this.node.id}`, el)
+					// GraphStore.getInstance().initFieldNode(el)
 				})
-
+                // GraphStore.getInstance().addEndpoint(this.$el)
 			})
 		},
 		methods: {
@@ -65,6 +65,8 @@
 			}
 		}
 		&_content {
+			margin: 0;
+			padding: 0;
 		}
 	}
 </style>
