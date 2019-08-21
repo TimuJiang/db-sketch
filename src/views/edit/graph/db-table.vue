@@ -1,7 +1,7 @@
 <template lang='pug'>
 	.db-table(:id="node.id" :style="{left: `${node.x}px`, top: `${node.y}px`}")
 		.db-table_title
-			.name 我得表格
+			.name {{ node.label }}
 			.toolbar
 				i.icon-button.el-icon-edit-outline
 		.db-table_content
@@ -26,9 +26,9 @@
 				this.node.fields.forEach(field => {
 					let el = document.querySelector(`#${field.id}`)
 					GraphStore.getInstance().addToTable(this.node.id, el)
-					GraphStore.getInstance().makeSource(el)
-					GraphStore.getInstance().makeTarget(el)
+					GraphStore.getInstance().initFieldNode(el)
 				})
+
 			})
 		},
 		methods: {
@@ -47,7 +47,6 @@
 		user-select: none;
 		font-size: 12px;
 		border-radius: 5px;
-		overflow: hidden;
 		&_title {
 			height: 30px;
 			padding: 0 5px;
@@ -64,6 +63,8 @@
 					font-size: 14px;
 				}
 			}
+		}
+		&_content {
 		}
 	}
 </style>

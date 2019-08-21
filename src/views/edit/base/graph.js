@@ -15,7 +15,7 @@ export default class Graph {
 			Connector: ['Bezier', { curviness: 50 }],
 			DragOptions: { cursor: 'pointer', zIndex: 2000 },
 			PaintStyle: { stroke: 'gray', strokeWidth: 2 },
-			EndpointStyle: { radius: 9, fill: 'gray' },
+			EndpointStyle: { radius: 5, fill: '#42b983' },
 			HoverPaintStyle: { stroke: '#ec9f2e' },
 			EndpointHoverStyle: { fill: '#ec9f2e' }
 		})
@@ -49,17 +49,26 @@ export default class Graph {
 		})
 	}
 
+	addEndpoint($el) {
+		this.graph.addEndpoint($el, {
+			isSource: true,
+			anchor: 'RightMiddle'
+		})
+		this.graph.addEndpoint($el, {
+			isTarget: true,
+			anchor: 'LeftMiddle'
+		})
+	}
+
 	addToGroup(tableId, id) {
 		this.graph.addToGroup(tableId, id)
 	}
 	addGroup ($el, id) {
 		this.graph.addGroup({
 			el: $el,
-			id: id,
-			constrain: true,
-			anchor: 'Continuous',
-			droppable: false,
-			endpoint: ['Dot', {radius: 3}]
+			id: id
+			// droppable: false,
+			// constrain: true
 		})
 	}
 }

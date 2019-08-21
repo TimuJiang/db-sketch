@@ -10,7 +10,7 @@
 			el-container
 				el-main
 					graph.edit-graph(:table="table")
-		create-table-dialog(:show="true")
+		create-table-dialog(:show="showCreate" @close="onClose" @sure="onSure")
 </template>
 
 <script>
@@ -19,21 +19,35 @@
 	import LeftTool from './edit/left-tool'
 	import GraphStore from './edit/base/graph-store'
 	import CreateTableDialog from './edit/create-table-dialog'
+
 	export default {
 		name: 'edit',
 		components: {Graph, TopTool, LeftTool, CreateTableDialog},
 		data() {
 			return {
-				table: []
+				table: [],
+				showCreate: false
 			}
 		},
 		methods: {
 			onAddNew() {
-				let t = GraphStore.getInstance().createTable()
-				this.table.push(t)
-				this.$nextTick(() => {
-					GraphStore.getInstance().setDraggable(t.id)
-				})
+				this.showCreate = true
+			},
+			onClose() {
+				this.showCreate = false
+			},
+			onSure(data) {
+				let h = this.table.find(t => t.id === data.title)
+				if (!h) {
+					let t = GraphStore.getInstance().createTable(data)
+					this.table.push(t)
+					this.$nextTick(() => {
+						GraphStore.getInstance().setDraggable(t.id)
+					})
+				} else {
+					this.$message.error(`表名${data.title}已存在`)
+				}
+				this.showCreate = false
 			}
 		}
 	}

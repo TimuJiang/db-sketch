@@ -12,16 +12,15 @@ export default class GraphStore {
 	}
 	init(id) {
 		this.$graph = new Graph(id)
-		console.log(/graph/, this.$graph)
 	}
 
-	createTable() {
-		let id = `node-${new Date().getTime()}`
+	createTable(data) {
+		const {title, remark} = data
 		let t = new Table({
-			id: id,
-			label: 'test',
-			x: 100,
-			y: 100
+			id: title,
+			label: title,
+			x: 0,
+			y: 0
 		})
 		return t
 	}
@@ -38,6 +37,20 @@ export default class GraphStore {
 		this.$graph.makeSource($el)
 	}
 	makeTarget($el) {
-		this.$graph.makeSource($el)
+		this.$graph.makeTarget($el)
+	}
+	initFieldNode($el) {
+		let self = this
+		self.$graph.makeSource($el)
+		self.$graph.makeTarget($el)
+	}
+	addEndpoint($el) {
+		this.$graph.addEndpoint($el)
+	}
+	start() {
+		this.$graph.graph.setSuspendDrawing(false, true)
+	}
+	stop() {
+		this.$graph.graph.setSuspendDrawing(true)
 	}
 }
