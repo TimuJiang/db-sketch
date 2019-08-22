@@ -1,6 +1,7 @@
 <template lang='pug'>
 	.top-tool
 		menu-item(label="新增表" @click.native="onChange(1)")
+		menu-item(label="保存" @click.native="onChange(2)")
 
 </template>
 
@@ -11,7 +12,11 @@
 		components: {MenuItem},
 		methods: {
 			onChange (type) {
-				this.$emit('edit-new')
+				if (type === 1) {
+					this.$emit('edit-new')
+				} else if (type === 2) {
+					this.$emit('edit-save')
+				}
 			}
 		}
 	}

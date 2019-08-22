@@ -14,19 +14,24 @@ export default class Graph {
 		})
 	}
 	setDraggable(id) {
-		this.graph.draggable(id,  {
-			containment: 'parent'
+		this.graph.draggable(id, {
+			containment: 'parent',
+			start(params) {},
+			stop (params) {
+				// 拖动结束
+				console.log(params.pos)
+			}
 		})
 	}
 	makeSource($el) {
 		this.graph.makeSource($el, {
-			anchor: ['Perimeter', { shape: 'Rectangle' }]
+			anchor: ['Left', 'Right']
 		})
 	}
 	makeTarget ($el) {
 		this.graph.makeTarget($el, {
 			dropOptions: { hoverClass: 'dragHover' },
-			anchor: ['Perimeter', { shape: 'Rectangle' }],
+			anchor: ['Left', 'Right'],
 			allowLoopback: false
 		})
 	}

@@ -1,6 +1,6 @@
 <template lang='pug'>
 	.graph#graph
-		db-table(v-for="node,index in table" :node="node" :key="index")
+		db-table(v-for="node,index in tables" :node="node" :key="index")
 </template>
 
 <script>
@@ -10,7 +10,7 @@
 		name: 'graph',
 		components: { DbTable },
 		props: {
-			table: {
+			tables: {
 				type: Array,
 				default: function () {
 					return []

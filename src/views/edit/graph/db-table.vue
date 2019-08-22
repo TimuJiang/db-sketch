@@ -24,9 +24,9 @@
 			this.$nextTick(() => {
 				// GraphStore.getInstance().initTable(this.$el, `g-${this.node.id}`)
                 this.node.fields.forEach(field => {
-                    GraphStore.getInstance().addEndpoint(field.id)
+                    // GraphStore.getInstance().addEndpoint(field.id)
 					// GraphStore.getInstance().addToTable(`g-${this.node.id}`, el)
-					// GraphStore.getInstance().initFieldNode(el)
+					GraphStore.getInstance().initFieldNode(field.id)
 				})
                 // GraphStore.getInstance().addEndpoint(this.$el)
 			})

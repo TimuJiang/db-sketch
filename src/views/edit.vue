@@ -6,10 +6,11 @@
 			el-header(height="50px" :style="{background: '#080A0D'}")
 				top-tool(
 					@edit-new="onAddNew"
+					@edit-save="onSave"
 				)
 			el-container
 				el-main
-					graph.edit-graph(:table="table")
+					graph.edit-graph(:tables="tables")
 		create-table-dialog(:show="showCreate" @close="onClose" @sure="onSure")
 </template>
 
@@ -25,11 +26,15 @@
 		components: {Graph, TopTool, LeftTool, CreateTableDialog},
 		data() {
 			return {
-				table: [],
+				tables: [],
+				links: {},
 				showCreate: false
 			}
 		},
 		methods: {
+			onSave() {
+
+			},
 			onAddNew() {
 				this.showCreate = true
 			},
