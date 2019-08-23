@@ -1,5 +1,5 @@
 <template lang='pug'>
-	.db-table(:id="node.id")
+	.db-table(:id="node.id" :style="{left: `${node.x}px`, top: `${node.y}px`}")
 		.db-table_title
 			.name {{ node.label }}
 			.toolbar
@@ -45,9 +45,21 @@
 				if (f) {
 					this.$message.error('字段名不能重复')
 				} else {
-					this.node.createField(name, type, remark, primaryKey, isIndex)
+					this.createField(name, type, remark, primaryKey, isIndex)
 					this.showAdd = false
 				}
+			},
+			createField(name, type, remark, primaryKey, isIndex) {
+				let index = this.node.fields.length + 1
+				this.node.fields.push({
+					id: `${this.id}-f-${index}`,
+					name,
+					type,
+					remark: remark || '--',
+					primaryKey: primaryKey || false,
+					foreignKey: isIndex || false,
+					isIndex: false
+				})
 			}
 		}
 	}
@@ -55,7 +67,7 @@
 <style lang="scss" scoped>
 	.db-table {
 		position: absolute;
-		width: 240px;
+		width: 220px;
 		background: #e2e2e2;
 		box-shadow: 0 0 3px rgba(0,0,0, 0.2);
 		user-select: none;

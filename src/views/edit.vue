@@ -7,6 +7,7 @@
 				top-tool(
 					@edit-new="onAddNew"
 					@edit-save="onSave"
+					@edit-clear="onClear"
 				)
 			el-container
 				el-main
@@ -31,7 +32,27 @@
 				showCreate: false
 			}
 		},
+		created() {
+
+		},
+		mounted() {
+			this.loadData()
+
+		},
 		methods: {
+			loadData() {
+				let dataString = localStorage.getItem('db-s')
+				let data = JSON.parse(dataString)
+				if (data) {
+					this.tables = data.tables
+					this.links = data.links
+				}
+			},
+			onClear() {
+				this.tables = []
+				this.links = []
+				localStorage.setItem('db-s', '{}')
+			},
 			onSave() {
 				let data = {
 					tables: this.tables,

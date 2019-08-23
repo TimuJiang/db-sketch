@@ -2,6 +2,7 @@
 	.top-tool
 		menu-item(label="新增表" @click.native="onChange(1)")
 		menu-item(label="保存" @click.native="onChange(2)")
+		menu-item(label="清除" @click.native="onChange(3)")
 
 </template>
 
@@ -16,6 +17,8 @@
 					this.$emit('edit-new')
 				} else if (type === 2) {
 					this.$emit('edit-save')
+				} else if (type === 3) {
+					this.$emit('edit-clear')
 				}
 			}
 		}

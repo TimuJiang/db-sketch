@@ -29,6 +29,11 @@
 		    this.$nextTick(() => {
                 GraphStore.getInstance().init(this.$el, this.$root)
 				this.$root.$on('app-draggable-end', this.updateTable)
+				GraphStore.getInstance().$graph.graph.bind('connection', (connection, event) => {
+					console.log(this)
+					console.log(connection)
+					console.log(event)
+				})
 			})
 		},
 		methods: {
