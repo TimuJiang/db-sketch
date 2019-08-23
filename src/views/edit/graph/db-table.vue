@@ -4,36 +4,50 @@
 			.name {{ node.label }}
 			.toolbar
 				i.icon-button.el-icon-edit-outline
+				i.icon-button.el-icon-plus(@click="showAddField")
 		ul.db-table_content
 			db-field(v-for="field,index in node.fields" :key="index" :field="field")
+		add-field-dialog(:show="showAdd" @close="onClose" @sure="onSure")
 </template>
 
 <script>
+	import AddFieldDialog from '../add-field-dialog'
 	import GraphStore from '../base/graph-store'
 	import DbField from './db-field'
 	export default {
 		name: 'db-table',
 		props: [ 'node' ],
-		components: { DbField },
+		components: { DbField, AddFieldDialog },
 		data() {
 			return {
-				draggable: false
+				draggable: false,
+				showAdd: false
 			}
 		},
 		mounted() {
 			this.$nextTick(() => {
-				// GraphStore.getInstance().initTable(this.$el, `g-${this.node.id}`)
                 this.node.fields.forEach(field => {
-                    // GraphStore.getInstance().addEndpoint(field.id)
-					// GraphStore.getInstance().addToTable(`g-${this.node.id}`, el)
 					GraphStore.getInstance().initFieldNode(field.id)
 				})
-                // GraphStore.getInstance().addEndpoint(this.$el)
+				GraphStore.getInstance().setDraggable(this.$el)
 			})
 		},
 		methods: {
-			onSetMove(type) {
-
+			showAddField() {
+				this.showAdd = true
+			},
+			onClose() {
+				this.showAdd = false
+			},
+			onSure(data) {
+				const {name, type, remark, primaryKey, isIndex} = data
+				let f = this.node.fields.find(field => field.name === name)
+				if (f) {
+					this.$message.error('字段名不能重复')
+				} else {
+					this.node.createField(name, type, remark, primaryKey, isIndex)
+					this.showAdd = false
+				}
 			}
 		}
 	}
@@ -61,6 +75,7 @@
 				.icon-button {
 					cursor: pointer;
 					font-size: 14px;
+					margin: 0 5px;
 				}
 			}
 		}

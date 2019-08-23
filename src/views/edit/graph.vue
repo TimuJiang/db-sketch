@@ -27,8 +27,19 @@
 		},
 		mounted() {
 		    this.$nextTick(() => {
-                GraphStore.getInstance().init(this.$el)
+                GraphStore.getInstance().init(this.$el, this.$root)
+				this.$root.$on('app-draggable-end', this.updateTable)
 			})
+		},
+		methods: {
+			updateTable(e) {
+				let t = this.tables.find(t => t.id === e.id)
+				console.log(e)
+				if (t) {
+					t.x = e.params.pos[0]
+					t.y = e.params.pos[1]
+				}
+			}
 		}
 	}
 </script>

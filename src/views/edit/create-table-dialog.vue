@@ -1,7 +1,7 @@
 <template lang='pug'>
 	el-dialog.create-table-dialog(
 		title="新建表"
-		:visible.sync="show"
+		:visible="show"
 		width="400px"
 		@close="onClose"
 	)
@@ -15,8 +15,8 @@
 				placeholder="请输入内容"
 				v-model="remark" autocomplete="off")
 		span(slot="footer" class="dialog-footer")
-			el-button(@click="onClose") 取 消
-			el-button(type="primary" @click="onSure") 确 定
+			el-button(size="small" @click="onClose") 取 消
+			el-button(size="small" type="primary" @click="onSure") 确 定
 </template>
 
 <script>

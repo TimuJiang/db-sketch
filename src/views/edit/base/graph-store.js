@@ -5,13 +5,15 @@ export default class GraphStore {
 	// eslint-disable-next-line no-useless-constructor
 	constructor() {
 		this.$graph = ''
+		this.$app = ''
 	}
 	static getInstance () {
 		if (!instance) instance = new GraphStore()
 		return instance
 	}
-	init(id) {
+	init(id, app) {
 		this.$graph = new Graph(id)
+		this.$app = app
 	}
 
 	createTable(data) {
@@ -25,13 +27,7 @@ export default class GraphStore {
 		return t
 	}
 	setDraggable(id) {
-		this.$graph.setDraggable(id)
-	}
-	initTable($el, id) {
-		this.$graph.addGroup($el, id)
-	}
-	addToTable(tableId, id) {
-		this.$graph.addToGroup(tableId, id)
+		this.$graph.setDraggable(id, this.$app)
 	}
 	makeSource($el) {
 		this.$graph.makeSource($el)

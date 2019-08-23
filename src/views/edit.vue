@@ -27,13 +27,19 @@
 		data() {
 			return {
 				tables: [],
-				links: {},
+				links: [],
 				showCreate: false
 			}
 		},
 		methods: {
 			onSave() {
-
+				let data = {
+					tables: this.tables,
+					links: this.links
+				}
+				let str = JSON.stringify(data)
+				localStorage.setItem('db-s', str)
+				this.$message.success('保存成功')
 			},
 			onAddNew() {
 				this.showCreate = true
@@ -42,13 +48,11 @@
 				this.showCreate = false
 			},
 			onSure(data) {
-				let h = this.table.find(t => t.id === data.title)
+				let h = this.tables.find(t => t.id === data.title)
 				if (!h) {
 					let t = GraphStore.getInstance().createTable(data)
-					this.table.push(t)
-					this.$nextTick(() => {
-						GraphStore.getInstance().setDraggable(t.id)
-					})
+					this.tables.push(t)
+
 				} else {
 					this.$message.error(`表名${data.title}已存在`)
 				}
@@ -62,6 +66,7 @@
 		height: 100vh;
 		width: 100vw;
 		overflow: hidden;
+
 		.edit-graph {
 			height: 100%;
 		}
