@@ -11,9 +11,8 @@ export default class Table {
 		this.createField('name', 'String')
 	}
 	createField(name, type, remark, primaryKey, isIndex) {
-		let index = this.fields.length + 1
 		let f = {
-			id: `${this.id}-f-${index}`,
+			id: `${this.id}-f-${name}`,
 			name,									// 字段名
 			type,									// 字段类型
 			remark: remark || '--', 				// 字段备注

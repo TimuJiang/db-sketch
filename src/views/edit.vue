@@ -11,7 +11,11 @@
 				)
 			el-container
 				el-main
-					graph.edit-graph(:tables="tables")
+					graph.edit-graph(
+						:tables="tables"
+						@delete-connection="onDeleteConnection"
+						@add-connection="onAddConnection"
+					)
 		create-table-dialog(:show="showCreate" @close="onClose" @sure="onSure")
 </template>
 
@@ -37,16 +41,21 @@
 		},
 		mounted() {
 			this.loadData()
-
 		},
 		methods: {
 			loadData() {
 				let dataString = localStorage.getItem('db-s')
 				let data = JSON.parse(dataString)
 				if (data) {
-					this.tables = data.tables
-					this.links = data.links
+					this.tables = data.tables || []
+					this.links = data.links || []
+					this.initLinks()
 				}
+			},
+			initLinks() {
+				this.$nextTick(() => {
+					GraphStore.getInstance().initConnection(this.links)
+				})
 			},
 			onClear() {
 				this.tables = []
@@ -54,9 +63,10 @@
 				localStorage.setItem('db-s', '{}')
 			},
 			onSave() {
+				let links = GraphStore.getInstance().getLinks()
 				let data = {
 					tables: this.tables,
-					links: this.links
+					links: links
 				}
 				let str = JSON.stringify(data)
 				localStorage.setItem('db-s', str)
@@ -73,11 +83,16 @@
 				if (!h) {
 					let t = GraphStore.getInstance().createTable(data)
 					this.tables.push(t)
-
 				} else {
 					this.$message.error(`表名${data.title}已存在`)
 				}
 				this.showCreate = false
+			},
+			// 删除连线
+			onDeleteConnection(c) {
+			},
+			// 添加联线
+			onAddConnection(c) {
 			}
 		}
 	}

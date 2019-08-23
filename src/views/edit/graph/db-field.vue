@@ -2,6 +2,9 @@
 	li.db-field(:id="field.id")
 		span.name {{field.name}}
 		span.type {{field.type}}
+		span.tools(@click.stop.prevent="onStop" @mousedown.stop.prevent="onStop")
+			i.icon-button.el-icon-delete(@click="onDelete")
+			i.icon-button.el-icon-edit-outline
 </template>
 
 <script>
@@ -16,13 +19,29 @@
 				}
 			}
 		},
+		data() {
+			return {
+				visible: false
+			}
+		},
 		mounted() {
 			this.$nextTick(() => {
 				GraphStore.getInstance().initFieldNode(this.field.id)
 			})
+		},
+		methods: {
+			onDelete() {
+				this.$emit('delete', this.field)
+			},
+			onStop () { }
 		}
 	}
 </script>
+<style>
+	.jtk-connected {
+		background: rgba(66, 185, 131, 0.1);
+	}
+</style>
 <style lang="scss" scoped>
 	.db-field {
 		height: 28px;
@@ -31,6 +50,7 @@
 		color: rgba(0,0,0, 0.6);
 		display: flex;
 		border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+		overflow: hidden;
 		&:last-child {
 			border-bottom: none;
 		}
@@ -40,7 +60,25 @@
 			font-weight: 600;
 		}
 		.type {
-			width: 50%;
+			width: 30%;
+		}
+		.tools {
+			width: 20%;
+			text-align: right;
+			.icon-button {
+				margin: 0 2px;
+				cursor: pointer;
+				visibility: hidden;
+				font-size: 14px;
+				&:hover {
+					color: #42b983;
+				}
+			}
+		}
+		&:hover {
+			.icon-button {
+				visibility: visible;
+			}
 		}
 	}
 </style>

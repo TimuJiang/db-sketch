@@ -6,7 +6,7 @@
 				i.icon-button.el-icon-edit-outline
 				i.icon-button.el-icon-plus(@click="showAddField")
 		ul.db-table_content
-			db-field(v-for="field,index in node.fields" :key="index" :field="field")
+			db-field(v-for="field,index in node.fields" :key="index" :field="field" @delete="onDeleteField")
 		add-field-dialog(:show="showAdd" @close="onClose" @sure="onSure")
 </template>
 
@@ -26,9 +26,9 @@
 		},
 		mounted() {
 			this.$nextTick(() => {
-                this.node.fields.forEach(field => {
-					GraphStore.getInstance().initFieldNode(field.id)
-				})
+                // this.node.fields.forEach(field => {
+				// 	GraphStore.getInstance().initFieldNode(field.id)
+				// })
 				GraphStore.getInstance().setDraggable(this.$el)
 			})
 		},
@@ -49,10 +49,14 @@
 					this.showAdd = false
 				}
 			},
+			onDeleteField(field) {
+				let index = this.node.fields.findIndex(f => f.id === field.id )
+				if (index > -1) this.node.fields.splice(index, 1)
+				// todo 删除对应的连线
+			},
 			createField(name, type, remark, primaryKey, isIndex) {
-				let index = this.node.fields.length + 1
 				this.node.fields.push({
-					id: `${this.id}-f-${index}`,
+					id: `${this.node.id}-f-${name}`,
 					name,
 					type,
 					remark: remark || '--',

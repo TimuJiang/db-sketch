@@ -43,23 +43,4 @@ export default class Graph {
 			allowLoopback: false
 		})
 	}
-
-	addEndpoint($el) {
-		this.graph.addEndpoint($el, {
-			...baseStyle,
-			isSource: true,
-			isTarget: true,
-			maxConnections: -1,
-			anchors: 'Right',
-			uuid: $el + '-right'
-
-		})
-		this.graph.addEndpoint($el, {
-			...baseStyle,
-			isSource: true,
-			isTarget: true,
-			anchors: 'Left',
-			uuid: $el + '-left'
-		})
-	}
 }
