@@ -64,6 +64,11 @@ export default class GraphStore {
 		self.$graph.makeTarget($el)
 	}
 
+	clearFieldNode($el) {
+		this.$graph.graph.unmakeSource($el)
+		this.$graph.graph.makeTarget($el)
+	}
+
 	initConnection(links) {
 		links.forEach(l => {
 			this.$graph.graph.connect({

@@ -26,10 +26,13 @@
 		},
 		mounted() {
 			this.$nextTick(() => {
-				GraphStore.getInstance().initFieldNode(this.field.id)
+				GraphStore.getInstance().initFieldNode(this.$el)
 			})
 		},
 		beforeDestroy() {
+			this.$nextTick(() => {
+				GraphStore.getInstance().clearFieldNode(this.$el)
+			})
 		},
 		methods: {
 			onDelete() {
