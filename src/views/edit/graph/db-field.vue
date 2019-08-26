@@ -29,6 +29,8 @@
 				GraphStore.getInstance().initFieldNode(this.field.id)
 			})
 		},
+		beforeDestroy() {
+		},
 		methods: {
 			onDelete() {
 				this.$emit('delete', this.field)

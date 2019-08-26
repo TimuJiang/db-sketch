@@ -74,6 +74,16 @@ export default class GraphStore {
 		})
 		console.log(/root/, this.$graph.graph.getAllConnections())
 	}
+
+	deleteConnection (sourceId) {
+		let connections = this.$graph.graph.getAllConnections() || []
+		let connection = connections.filter(c => c.sourceId === sourceId)
+		if (connection) {
+			connection.forEach(cc => {
+				this.$graph.graph.deleteConnection(cc)
+			})
+		}
+	}
 	getLinks() {
 		let connections = this.$graph.graph.getAllConnections() || []
 		let links = []

@@ -6,7 +6,7 @@
 				i.icon-button.el-icon-edit-outline
 				i.icon-button.el-icon-plus(@click="showAddField")
 		ul.db-table_content
-			db-field(v-for="field,index in node.fields" :key="index" :field="field" @delete="onDeleteField")
+			db-field(v-for="field,index in node.fields" :key="field.id" :field="field" @delete="onDeleteField")
 		add-field-dialog(:show="showAdd" @close="onClose" @sure="onSure")
 </template>
 
@@ -50,9 +50,11 @@
 				}
 			},
 			onDeleteField(field) {
-				let index = this.node.fields.findIndex(f => f.id === field.id )
-				if (index > -1) this.node.fields.splice(index, 1)
-				// todo 删除对应的连线
+				let index = this.node.fields.findIndex(f => f.id === field.id)
+				if (index > -1) {
+					this.node.fields.splice(index, 1)
+					GraphStore.getInstance().deleteConnection(field.id)
+				}
 			},
 			createField(name, type, remark, primaryKey, isIndex) {
 				this.node.fields.push({
