@@ -74,7 +74,22 @@ export default class GraphStore {
 			this.$graph.graph.connect({
 				source: l.sourceId,
 				target: l.targetId,
-				anchors: ['Right', 'Left']
+				anchors: ['Right', 'Left'],
+				overlays: [
+					['Arrow', { width: 8, length: 8, location: 0.5 }],
+					[ 'Label', {
+						events: {
+							click: (e) => {
+								console.log(/node/, e)
+								this.$app.$emit('overlay-click', e)
+							}
+						},
+						label: '1-N',
+						location: 0.85,
+						id: l.sourceId + '-o-' + l.targetId,
+						cssClass: 'overlay-label'}
+					]
+				]
 			})
 		})
 		console.log(/root/, this.$graph.graph.getAllConnections())

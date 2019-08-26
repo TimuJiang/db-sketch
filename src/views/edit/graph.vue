@@ -35,7 +35,10 @@
 				GraphStore.getInstance().$graph.graph.bind('connectionDetached', this.detachedConnection)
 			})
 		},
+		beforeDestroy() {
+		},
 		methods: {
+
 			addConnection(connection, event) {
 				const {sourceId, targetId} = connection
 				console.log(/add/, sourceId + '->' + targetId)
@@ -74,6 +77,16 @@
 		}
 	}
 </script>
+<style lang="scss">
+	.overlay-label {
+		font-size: 12px;
+		color: #f2f2f2;
+		background: #42b983;
+		border-radius: 3px;
+		padding: 2px 3px;
+		cursor: pointer;
+	}
+</style>
 <style lang="scss" scoped>
 	.graph {
 		position: relative;

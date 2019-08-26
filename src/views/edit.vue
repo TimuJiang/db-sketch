@@ -17,6 +17,7 @@
 						@add-connection="onAddConnection"
 					)
 		create-table-dialog(:show="showCreate" @close="onClose" @sure="onSure")
+		relation-dialog(:show="showRelation" @close="onRelationClose" @sure="onRelationSure")
 </template>
 
 <script>
@@ -25,24 +26,37 @@
 	import LeftTool from './edit/left-tool'
 	import GraphStore from './edit/base/graph-store'
 	import CreateTableDialog from './edit/create-table-dialog'
+	import RelationDialog from './edit/relation-dialog'
 
 	export default {
 		name: 'edit',
-		components: {Graph, TopTool, LeftTool, CreateTableDialog},
+		components: {Graph, TopTool, LeftTool, CreateTableDialog, RelationDialog},
 		data() {
 			return {
 				tables: [],
 				links: [],
-				showCreate: false
+				showCreate: false,
+				showRelation: false
 			}
 		},
 		created() {
 
 		},
 		mounted() {
+			this.$root.$on('overlay-click', this.onOverlayClick)
 			this.loadData()
 		},
+		beforeDestroy() {
+			this.$root.$off('overlay-click', this.onOverlayClick)
+		},
 		methods: {
+			onOverlayClick(Label) {
+				const {sourceId, targetId} = Label.component
+				let id = `${sourceId}_${targetId}`
+				let l = this.links.find(l => l.id === id)
+				this.$message.success(l.id)
+				this.showRelation = true
+			},
 			loadData() {
 				let dataString = localStorage.getItem('db-s')
 				let data = JSON.parse(dataString)
@@ -87,6 +101,10 @@
 					this.$message.error(`表名${data.title}已存在`)
 				}
 				this.showCreate = false
+			},
+			onRelationSure () {},
+			onRelationClose() {
+				this.showRelation = false
 			},
 			// 删除连线
 			onDeleteConnection(c) {
