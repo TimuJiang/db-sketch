@@ -1,17 +1,10 @@
 import {jsPlumb} from 'jsplumb'
 
-const baseStyle = {}
 export default class Graph {
 	// eslint-disable-next-line no-useless-constructor
 	constructor(id) {
 		this.graph = jsPlumb.getInstance({
-			Container: id,
-			Connector: ['Flowchart'],
-			DragOptions: {cursor: 'pointer', zIndex: 2000},
-			PaintStyle: {stroke: '#dddddd', strokeWidth: 2},
-			EndpointStyle: {radius: 5, fill: '#42b983'},
-			HoverPaintStyle: {stroke: '#ec9f2e'},
-			EndpointHoverStyle: {fill: '#ec9f2e'}
+			Container: id
 		})
 	}
 

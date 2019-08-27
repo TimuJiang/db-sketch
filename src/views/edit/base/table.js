@@ -8,7 +8,7 @@ export default class Table {
 		this.remark = options.remark || ''
 		this.x = options.x || 0
 		this.y = options.y || 0
-		this.fields = [...options.fields]
+		this.fields = options.fields ? [...options.fields] : []
 	}
 	createField(name, type, remark, primaryKey, isIndex) {
 		let f = {

@@ -1,6 +1,6 @@
 import Graph from './graph.js'
 import Table from './table'
-
+import { DefaultsConfig } from './config'
 let instance = ''
 export default class GraphStore {
 	// eslint-disable-next-line no-useless-constructor
@@ -17,6 +17,7 @@ export default class GraphStore {
 	init(id, app) {
 		this.$graph = new Graph(id)
 		this.$app = app
+		this.$graph.graph.importDefaults(DefaultsConfig)
 		this.$graph.graph.bind('beforeDrop', this.VerifyConnection.bind(this))
 	}
 
@@ -68,14 +69,11 @@ export default class GraphStore {
 
 	initConnection(links) {
 		links.forEach(l => {
-			console.log(/l.sourceId/, l.sourceId)
-			console.log(/l.targetId/, l.targetId)
 			this.$graph.graph.connect({
 				source: l.sourceId,
 				target: l.targetId,
 				anchors: ['Right', 'Left'],
 				overlays: [
-					['Arrow', {width: 8, length: 8, location: 0.5}],
 					['Label', {
 						events: {
 							click: (e) => {
@@ -91,7 +89,6 @@ export default class GraphStore {
 				]
 			})
 		})
-		console.log(/root/, this.$graph.graph.getAllConnections())
 	}
 
 	deleteConnection(sourceId) {
