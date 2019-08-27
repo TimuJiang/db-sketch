@@ -1,21 +1,18 @@
 <template lang='pug'>
 	el-container.edit
-		el-aside(width="240px" :style="{background:'#181E2A'}")
-			left-tool
+		el-header(height="50px" :style="{background: '#080A0D'}")
+			top-tool(
+				@edit-new="onAddNew"
+				@edit-save="onSave"
+				@edit-clear="onClear"
+			)
 		el-container
-			el-header(height="50px" :style="{background: '#080A0D'}")
-				top-tool(
-					@edit-new="onAddNew"
-					@edit-save="onSave"
-					@edit-clear="onClear"
+			el-main
+				graph.edit-graph(
+					:tables="tables"
+					@delete-connection="onDeleteConnection"
+					@add-connection="onAddConnection"
 				)
-			el-container
-				el-main
-					graph.edit-graph(
-						:tables="tables"
-						@delete-connection="onDeleteConnection"
-						@add-connection="onAddConnection"
-					)
 		create-table-dialog(:show="showCreate" @close="onClose" @sure="onSure")
 		relation-dialog(:show="showRelation" @close="onRelationClose" @sure="onRelationSure")
 </template>
@@ -23,14 +20,13 @@
 <script>
 	import Graph from './edit/graph'
 	import TopTool from './edit/top-tool'
-	import LeftTool from './edit/left-tool'
 	import GraphStore from './edit/base/graph-store'
 	import CreateTableDialog from './edit/create-table-dialog'
 	import RelationDialog from './edit/relation-dialog'
 	import Table from './edit/base/table'
 	export default {
 		name: 'edit',
-		components: {Graph, TopTool, LeftTool, CreateTableDialog, RelationDialog},
+		components: {Graph, TopTool, CreateTableDialog, RelationDialog},
 		data() {
 			return {
 				tables: [],

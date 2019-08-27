@@ -11,7 +11,12 @@ export default new Router({
 			component: () => import('./views/index.vue')
 		},
 		{
-			path: '/edit',
+			path: '/list',
+			name: 'list',
+			component: () => import('./views/list.vue')
+		},
+		{
+			path: '/edit/:id?',
 			name: 'edit',
 			component: () => import('./views/edit.vue')
 		}

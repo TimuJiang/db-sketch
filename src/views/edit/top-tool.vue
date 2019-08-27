@@ -1,9 +1,9 @@
 <template lang='pug'>
 	.top-tool
+		menu-item(label="返回" @click.native="onChange(0)")
 		menu-item(label="新增表" @click.native="onChange(1)")
 		menu-item(label="保存" @click.native="onChange(2)")
 		menu-item(label="清除" @click.native="onChange(3)")
-
 </template>
 
 <script>
