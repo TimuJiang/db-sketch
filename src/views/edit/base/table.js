@@ -3,7 +3,7 @@ import shortid from 'shortid'
 export default class Table {
 	// eslint-disable-next-line no-useless-constructor
 	constructor(options) {
-		this.id = shortid.generate()
+		this.id = options.id || shortid.generate()
 		this.label = options.label || ''
 		this.remark = options.remark || ''
 		this.x = options.x || 0
