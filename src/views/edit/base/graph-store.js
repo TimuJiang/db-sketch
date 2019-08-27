@@ -24,12 +24,11 @@ export default class GraphStore {
 	VerifyConnection(e) {
 		const {sourceId, targetId} = e
 		let r = true //  false 不会连线
+		console.log(e)
 		// todo 验证是否同表
-		let s = sourceId.split('-f-')[0]
-		let t = sourceId.split('-f-')[0]
-		r = !(s === t)
+		r = !(sourceId === targetId)
 		// todo 验证重复连线
-		let index = this.$graph.graph.getAllConnections().findIndex(c => (sourceId+targetId) === (c.sourceId+c.targetId))
+		let index = this.$graph.graph.getAllConnections().findIndex(c => (sourceId + targetId) === (c.sourceId + c.targetId))
 		r = !(index > -1)
 		return r
 	}
@@ -37,7 +36,6 @@ export default class GraphStore {
 	createTable(data) {
 		const {title, remark} = data
 		let t = new Table({
-			id: title,
 			label: title,
 			x: 0,
 			y: 0,
@@ -59,35 +57,36 @@ export default class GraphStore {
 	}
 
 	initFieldNode($el) {
-		let self = this
-		self.$graph.makeSource($el)
-		self.$graph.makeTarget($el)
+		this.$graph.makeSource($el)
+		this.$graph.makeTarget($el)
 	}
 
 	clearFieldNode($el) {
 		this.$graph.graph.unmakeSource($el)
-		this.$graph.graph.makeTarget($el)
+		this.$graph.graph.unmakeTarget($el)
 	}
 
 	initConnection(links) {
 		links.forEach(l => {
+			console.log(/l.sourceId/, l.sourceId)
+			console.log(/l.targetId/, l.targetId)
 			this.$graph.graph.connect({
 				source: l.sourceId,
 				target: l.targetId,
 				anchors: ['Right', 'Left'],
 				overlays: [
-					['Arrow', { width: 8, length: 8, location: 0.5 }],
-					[ 'Label', {
+					['Arrow', {width: 8, length: 8, location: 0.5}],
+					['Label', {
 						events: {
 							click: (e) => {
-								console.log(/node/, e)
 								this.$app.$emit('overlay-click', e)
 							}
 						},
 						label: '1-N',
 						location: 0.85,
 						id: l.sourceId + '-o-' + l.targetId,
-						cssClass: 'overlay-label'}
+						cssClass: 'overlay-label'
+					}
 					]
 				]
 			})
@@ -95,7 +94,7 @@ export default class GraphStore {
 		console.log(/root/, this.$graph.graph.getAllConnections())
 	}
 
-	deleteConnection (sourceId) {
+	deleteConnection(sourceId) {
 		let connections = this.$graph.graph.getAllConnections() || []
 		let connection = connections.filter(c => c.sourceId === sourceId)
 		if (connection) {
@@ -104,6 +103,7 @@ export default class GraphStore {
 			})
 		}
 	}
+
 	getLinks() {
 		let connections = this.$graph.graph.getAllConnections() || []
 		let links = []

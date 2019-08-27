@@ -1,18 +1,18 @@
+import shortid from 'shortid'
+
 export default class Table {
 	// eslint-disable-next-line no-useless-constructor
 	constructor(options) {
-		this.id = options.id || ''
+		this.id = shortid.generate()
 		this.label = options.label || ''
 		this.remark = options.remark || ''
 		this.x = options.x || 0
 		this.y = options.y || 0
-		this.fields = []
-		this.createField('id', 'String', '')
-		this.createField('name', 'String')
+		this.fields = [...options.fields]
 	}
 	createField(name, type, remark, primaryKey, isIndex) {
 		let f = {
-			id: `${this.id}-f-${name}`,
+			id: shortid.generate(),
 			name,									// 字段名
 			type,									// 字段类型
 			remark: remark || '--', 				// 字段备注

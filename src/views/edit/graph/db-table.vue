@@ -26,9 +26,6 @@
 		},
 		mounted() {
 			this.$nextTick(() => {
-                // this.node.fields.forEach(field => {
-				// 	GraphStore.getInstance().initFieldNode(field.id)
-				// })
 				GraphStore.getInstance().setDraggable(this.$el)
 			})
 		},
@@ -45,7 +42,7 @@
 				if (f) {
 					this.$message.error('字段名不能重复')
 				} else {
-					this.createField(name, type, remark, primaryKey, isIndex)
+					this.node.createField(name, type, remark, primaryKey, isIndex)
 					this.showAdd = false
 				}
 			},
@@ -55,17 +52,6 @@
 					this.node.fields.splice(index, 1)
 					GraphStore.getInstance().deleteConnection(field.id)
 				}
-			},
-			createField(name, type, remark, primaryKey, isIndex) {
-				this.node.fields.push({
-					id: `${this.node.id}-f-${name}`,
-					name,
-					type,
-					remark: remark || '--',
-					primaryKey: primaryKey || false,
-					foreignKey: isIndex || false,
-					isIndex: false
-				})
 			}
 		}
 	}

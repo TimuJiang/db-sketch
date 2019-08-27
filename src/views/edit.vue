@@ -27,7 +27,7 @@
 	import GraphStore from './edit/base/graph-store'
 	import CreateTableDialog from './edit/create-table-dialog'
 	import RelationDialog from './edit/relation-dialog'
-
+	import Table from './edit/base/table'
 	export default {
 		name: 'edit',
 		components: {Graph, TopTool, LeftTool, CreateTableDialog, RelationDialog},
@@ -61,7 +61,12 @@
 				let dataString = localStorage.getItem('db-s')
 				let data = JSON.parse(dataString)
 				if (data) {
-					this.tables = data.tables || []
+					let list = []
+					data.tables = data.tables || []
+					data.tables.forEach(t => {
+						list.push(new Table(t))
+					})
+					this.tables = [...list]
 					this.links = data.links || []
 					this.initLinks()
 				}

@@ -38,7 +38,6 @@
 		beforeDestroy() {
 		},
 		methods: {
-
 			addConnection(connection, event) {
 				const {sourceId, targetId} = connection
 				console.log(/add/, sourceId + '->' + targetId)
