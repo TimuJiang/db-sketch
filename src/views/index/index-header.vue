@@ -2,7 +2,9 @@
 	.index-header
 		.index-header__content
 			el-link(type="primary" @click="onLogin") 登录
+			el-divider(direction="vertical")
 			el-link(type="primary" @click="onLogout") 登出
+			el-divider(direction="vertical")
 			el-link(type="primary" @click="onSend") test
 </template>
 
@@ -41,7 +43,7 @@
 		&__content {
 			margin: 0 auto;
 			width: 1000px;
-			line-height: 50px;
+			line-height: 56px;
 			text-align: right;
 		}
 	}

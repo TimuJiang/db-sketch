@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 Vue.use(Router)
-
+// const context = require.context('./layout', false, /\.(route.js)$/)
 export default new Router({
 	mode: 'history',
 	routes: [
@@ -10,6 +10,11 @@ export default new Router({
 			path: '/',
 			name: 'index',
 			component: () => import('./views/index.vue')
+		},
+		{
+			path: '/login-menu',
+			name: 'auth',
+			component: () => import('./views/login-menu.vue')
 		},
 		{
 			path: '/login',
