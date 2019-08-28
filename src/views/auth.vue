@@ -13,7 +13,7 @@
 				getUserInfo(code, state)
 					.then(data => {
 						console.log(data)
-						next()
+						next('/')
 					})
 			})
 		},

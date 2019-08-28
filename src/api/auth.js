@@ -25,3 +25,7 @@ export function getUserInfo(code, state) {
 		state: state
 	})
 }
+
+export function logout() {
+	return axios.post('/oAuth/logout')
+}
