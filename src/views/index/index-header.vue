@@ -1,9 +1,10 @@
 <template lang='pug'>
 	.index-header
 		.index-header__content
-			el-link(type="primary" @click="onLogin") 登录
+			span(v-if="$store.state.user") {{$store.state.user.name}}
+			el-link(type="primary" @click="onLogin" v-if="!$store.state.user") 登录
 			el-divider(direction="vertical")
-			el-link(type="primary" @click="onLogout") 登出
+			el-link(type="primary" @click="onLogout" v-if="$store.state.user") 登出
 			el-divider(direction="vertical")
 			el-link(type="primary" @click="onSend") test
 </template>
@@ -22,6 +23,7 @@
 			onLogout() {
 				logout().then(response => {
 					console.log(/response/, response)
+					this.$store.commit('user', null)
 				})
 			},
 			onSend() {
