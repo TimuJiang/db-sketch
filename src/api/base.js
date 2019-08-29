@@ -5,11 +5,10 @@ export function post (url, data, params) {
 		axios
 			.post(url, data)
 			.then(res => {
-				let subCode = res.data.code.split('-').pop()
-				if (subCode === 'success') {
+				if (res.data.code === 0) {
 					resolve(res.data.data || {})
 				} else {
-					reject(res.data.data)
+					reject(res.data)
 				}
 			})
 			.catch(error => {

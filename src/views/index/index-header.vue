@@ -3,15 +3,12 @@
 		.index-header__content
 			span(v-if="$store.state.user") {{$store.state.user.name}}
 			el-link(type="primary" @click="onLogin" v-if="!$store.state.user") 登录
-			el-divider(direction="vertical")
+			el-divider(v-if="$store.state.user" direction="vertical")
 			el-link(type="primary" @click="onLogout" v-if="$store.state.user") 登出
-			el-divider(direction="vertical")
-			el-link(type="primary" @click="onSend") test
 </template>
 
 <script>
 	import { loginWithGithub, logout } from '../../api/auth'
-	import { create } from '../../api/project'
 	export default {
 		name: 'index-header',
 		methods: {
@@ -24,11 +21,6 @@
 				logout().then(response => {
 					console.log(/response/, response)
 					this.$store.commit('user', null)
-				})
-			},
-			onSend() {
-				create().then(response => {
-					console.log(response)
 				})
 			}
 		}

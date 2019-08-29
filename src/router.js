@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 Vue.use(Router)
-// const context = require.context('./layout', false, /\.(route.js)$/)
+
 export default new Router({
 	mode: 'history',
 	routes: [
@@ -22,9 +22,9 @@ export default new Router({
 			component: () => import('./views/auth.vue')
 		},
 		{
-			path: '/list',
-			name: 'list',
-			component: () => import('./views/list.vue')
+			path: '/project-list',
+			name: 'project-list',
+			component: () => import('./views/project-list.vue')
 		},
 		{
 			path: '/edit/:id?',
