@@ -2,6 +2,7 @@
 	el-container.edit
 		el-header(height="50px" :style="{background: '#080A0D'}")
 			top-tool(
+				@back="onBack"
 				@edit-new="onAddNew"
 				@edit-save="onSave"
 				@edit-clear="onClear"
@@ -112,6 +113,9 @@
 			},
 			// 添加联线
 			onAddConnection(c) {
+			},
+			onBack() {
+				this.$router.push('/project-list')
 			}
 		}
 	}

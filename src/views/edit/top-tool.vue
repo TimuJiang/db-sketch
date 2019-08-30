@@ -19,6 +19,8 @@
 					this.$emit('edit-save')
 				} else if (type === 3) {
 					this.$emit('edit-clear')
+				} else {
+					this.$emit('back')
 				}
 			}
 		}

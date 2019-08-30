@@ -22,6 +22,7 @@
 					this.$router.push('/project-list')
 				} else {
 					// todo 选择登录方式
+					this.$message.info('未登录，需要先登录');
 				}
 			}
 		}

@@ -13,7 +13,7 @@ export default new Router({
 		},
 		{
 			path: '/login-menu',
-			name: 'auth',
+			name: 'login-menu',
 			component: () => import('./views/login-menu.vue')
 		},
 		{
@@ -27,7 +27,7 @@ export default new Router({
 			component: () => import('./views/project-list.vue')
 		},
 		{
-			path: '/edit/:id?',
+			path: '/edit/:id',
 			name: 'edit',
 			component: () => import('./views/edit.vue')
 		}
