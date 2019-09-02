@@ -40,7 +40,6 @@
 		methods: {
 			addConnection(connection, event) {
 				const {sourceId, targetId} = connection
-				console.log(/add/, sourceId + '->' + targetId)
 				this.$emit('add-connection', {
 					id: `${sourceId}_${targetId}`,
 					sourceId,

@@ -5,10 +5,6 @@ export const FieldTypes = [
 	'Date'
 ]
 
-export const DefaultOverlaysConfig = [
-		['Arrow', {width: 8, length: 8, location: 0.5}]
-	]
-
 export const DefaultsConfig = {
 	anchors: ['Right', 'Left'],
 	Connector: ['Flowchart'],
@@ -17,6 +13,6 @@ export const DefaultsConfig = {
 	EndpointStyle: {radius: 5, fill: '#42b983'},
 	HoverPaintStyle: {stroke: '#ec9f2e'},
 	EndpointHoverStyle: {fill: '#ec9f2e'},
-	ConnectionOverlays: [...DefaultOverlaysConfig]
+	ConnectionOverlays: []
 
 }

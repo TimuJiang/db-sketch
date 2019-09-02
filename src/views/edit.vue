@@ -42,7 +42,6 @@
 		mounted() {
 			this.$root.$on('overlay-click', this.onOverlayClick)
 			let id = this.$route.params.id
-			console.log(/id/, id)
 			this.loadData(id)
 		},
 		beforeDestroy() {
