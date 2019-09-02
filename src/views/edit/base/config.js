@@ -1,6 +1,7 @@
 export const FieldTypes = [
 	'Number',
 	'String',
+	'Array',
 	'Date'
 ]
 
