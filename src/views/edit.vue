@@ -41,7 +41,9 @@
 		},
 		mounted() {
 			this.$root.$on('overlay-click', this.onOverlayClick)
-			this.loadData()
+			let id = this.$route.params.id
+			console.log(/id/, id)
+			this.loadData(id)
 		},
 		beforeDestroy() {
 			this.$root.$off('overlay-click', this.onOverlayClick)
@@ -54,19 +56,18 @@
 				this.$message.success(l.id)
 				this.showRelation = true
 			},
-			loadData() {
-				let dataString = localStorage.getItem('db-s')
-				let data = JSON.parse(dataString)
-				if (data) {
-					let list = []
-					data.tables = data.tables || []
-					data.tables.forEach(t => {
-						list.push(new Table(t))
+			loadData(id) {
+				this.$api.project.detail(id)
+					.then(data => {
+						const tables = data.tables || []
+						let list = []
+						tables.forEach(t => {
+							list.push(new Table(t))
+						})
+						this.tables = [...list]
+						this.links = data.links || []
+						this.initLinks()
 					})
-					this.tables = [...list]
-					this.links = data.links || []
-					this.initLinks()
-				}
 			},
 			initLinks() {
 				this.$nextTick(() => {
@@ -80,13 +81,10 @@
 			},
 			onSave() {
 				let links = GraphStore.getInstance().getLinks()
-				let data = {
-					tables: this.tables,
-					links: links
-				}
-				let str = JSON.stringify(data)
-				localStorage.setItem('db-s', str)
-				this.$message.success('保存成功')
+				this.$api.project.update(this.$route.params.id, this.tables, links)
+					.then(data => {
+						this.$message.success('保存成功')
+					})
 			},
 			onAddNew() {
 				this.showCreate = true
