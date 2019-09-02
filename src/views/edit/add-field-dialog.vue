@@ -6,22 +6,21 @@
 		@close="onClose"
 		@mousedown.native.stop="onStop"
 	)
-		.dialog-row
-			span.label 字段名
-			el-input(v-model="name" size="small" autocomplete="off")
-		.dialog-row
-			span.label 字段说明
-			el-input(v-model="remark" size="small" autocomplete="off")
-		.dialog-row
-			el-select(v-model="type" size="small" placeholder="请选择字段类型")
-				el-option(
-					v-for="type in _types"
-					:key="type"
-					:label="type"
-					:value="type")
+		el-row.dialog-row(:gutter="20")
+			el-col(:span="12")
+				el-input(v-model="name" size="small" autocomplete="off" placeholder="请输入字段名")
+			el-col(:span="12")
+				el-select(v-model="type" size="small" placeholder="请选择字段类型")
+					el-option(
+						v-for="type in _types"
+						:key="type"
+						:label="type"
+						:value="type")
 		.dialog-row
 			el-checkbox(v-model="primaryKey") 主键
 			el-checkbox(v-model="isIndex") 索引
+		.dialog-row
+			el-input(v-model="remark" size="small" autocomplete="off" placeholder="请输入字段说明")
 		span(slot="footer" class="dialog-footer")
 			el-button(size="small" @click="onClose") 取 消
 			el-button(size="small" type="primary" @click="onSure") 确 定
