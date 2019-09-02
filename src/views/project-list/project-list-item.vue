@@ -2,8 +2,8 @@
 	.project-list-item
 		span {{item.name || '--'}}
 		span.operating
-			i.el-icon-edit-outline
-			i.el-icon-delete
+			i.el-icon-edit-outline(@click.stop="onEdit")
+			i.el-icon-delete(@click.stop="onDelete")
 		span.more
 			i.el-icon-arrow-right
 </template>
@@ -17,6 +17,23 @@
 				default: function () {
 					return {}
 				}
+			}
+		},
+		methods: {
+			onEdit() {},
+			onDelete() {
+				this.$confirm('删除项目, 是否继续?', '提示', {
+					confirmButtonText: '确定',
+					cancelButtonText: '取消',
+					type: 'warning'
+				}).then(() => {
+					this.$api.project.deleteOne(this.item.id)
+						.then(result => {
+							this.$emit('delete', this.item)
+						})
+
+				}).catch(() => {
+				})
 			}
 		}
 	}

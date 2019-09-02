@@ -15,3 +15,7 @@ export function update(id, tables, links) {
 export function get() {
 	return post('/api/v1/project/get')
 }
+
+export function deleteOne(id) {
+	return post('/api/v1/project/delete', {id})
+}

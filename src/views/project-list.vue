@@ -3,7 +3,8 @@
 		.project-list__content
 			.toolbar
 				el-button(@click="onNew") 新建
-			project-list-item(v-for="item,index in list" :key="item._id" :item="item" @click.native="onEdit(item)")
+				el-button(@click="onUpdateSetting") 配置编辑
+			project-list-item(v-for="item,index in list" :key="item._id" :item="item" @click.native="onEdit(item)" @delete="onDelete")
 </template>
 
 <script>
@@ -48,6 +49,13 @@
 			},
 			onEdit(item) {
 				this.$router.push(`/edit/${item._id}`)
+			},
+			onDelete(item) {
+				const index = this.list.findIndex(l => l.id === item.id)
+				if (index > -1) this.list.splice(index, 1)
+			},
+			onUpdateSetting() {
+
 			}
 		}
 	}
