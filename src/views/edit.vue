@@ -15,7 +15,7 @@
 					@add-connection="onAddConnection"
 				)
 		create-table-dialog(:show="showCreate" @close="onClose" @sure="onSure")
-		relation-dialog(:show="showRelation" @close="onRelationClose" @sure="onRelationSure")
+		relation-dialog(ref="relation")
 </template>
 
 <script>
@@ -48,12 +48,12 @@
 			this.$root.$off('overlay-click', this.onOverlayClick)
 		},
 		methods: {
-			onOverlayClick(Label) {
-				const {sourceId, targetId} = Label.component
-				let id = `${sourceId}_${targetId}`
-				let l = this.links.find(l => l.id === id)
-				this.$message.success(l.id)
-				this.showRelation = true
+			onOverlayClick(e) {
+				this.$refs.relation.open(e.label)
+					.then(label => {
+						e.setLabel(label)
+					})
+					.catch(() => {})
 			},
 			loadData(id) {
 				this.$api.project.detail(id)

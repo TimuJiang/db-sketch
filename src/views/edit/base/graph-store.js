@@ -84,11 +84,14 @@ export default class GraphStore {
 
 	initConnection(links) {
 		links.forEach(l => {
-			this.$graph.graph.connect({
+			let c = this.$graph.graph.connect({
 				source: l.sourceId,
 				target: l.targetId,
 				anchors: ['Right', 'Left']
 			})
+			let overlays = c.getOverlays()
+			let label = Object.values(overlays).find(o => o.type === 'Label')
+			label.setLabel(l.type || '')
 		})
 	}
 
@@ -106,10 +109,12 @@ export default class GraphStore {
 		let connections = this.$graph.graph.getAllConnections() || []
 		let links = []
 		connections.forEach(c => {
+			let label = Object.values(c.getOverlays()).find(o => o.type === 'Label')
 			links.push({
 				id: `${c.sourceId}_${c.targetId}`,
 				sourceId: c.sourceId,
-				targetId: c.targetId
+				targetId: c.targetId,
+				type: label.getLabel()
 			})
 		})
 		return links

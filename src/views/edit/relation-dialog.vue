@@ -21,12 +21,6 @@
 <script>
 	export default {
 		name: 'relation-dialog',
-		props: {
-			show: {
-				type: Boolean,
-				default: false
-			}
-		},
 		beforeCreate() {
 			this._types = [
 				'1-1',
@@ -37,14 +31,29 @@
 		},
 		data() {
 			return {
-				type: ''
+				type: '',
+				show: false,
+				resolve: '',
+				reject: ''
 			}
 		},
 		methods: {
-			onClose () {
-				this.$emit('close')
+			open(value) {
+				this.type = value
+				this.show = true
+				return new Promise((resolve, reject) => {
+					this.resolve = resolve
+					this.reject = reject
+				})
 			},
-			onSure () {},
+			onClose () {
+				this.show = false
+				this.reject()
+			},
+			onSure () {
+				this.resolve(this.type)
+				this.show = false
+			},
 			onStop() {}
 		}
 	}
