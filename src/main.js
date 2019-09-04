@@ -1,12 +1,10 @@
 import Vue from 'vue'
 import './api/interceptor'
 import router from './router'
-import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css'
+import './element-ui'
+import './api'
 import store from './vuex/store'
 import App from './App.vue'
-import './api'
-Vue.use(ElementUI)
 Vue.config.productionTip = false
 new Vue({
 	router,

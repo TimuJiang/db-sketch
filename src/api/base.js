@@ -1,6 +1,5 @@
 import axios from 'axios'
 
-
 export function post(url, data, params) {
 	return new Promise((resolve, reject) => {
 		axios
