@@ -10,7 +10,8 @@ import {
 	Select,
 	Option,
 	Checkbox,
-	Dialog
+	Dialog,
+	Link
 } from 'element-ui'
 
 Vue.use(Button)
@@ -24,3 +25,4 @@ Vue.use(Select)
 Vue.use(Option)
 Vue.use(Checkbox)
 Vue.use(Dialog)
+Vue.use(Link)

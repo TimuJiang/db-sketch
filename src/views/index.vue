@@ -4,6 +4,7 @@
 		.index__centent
 			.db-sketch-row
 				el-button(type="primary" round @click="goDbSketch") db-sketch
+				el-button(type="primary" round @click="goTest") test
 
 </template>
 
@@ -22,8 +23,14 @@
 					this.$router.push('/project-list')
 				} else {
 					// todo 选择登录方式
-					this.$message.info('未登录，需要先登录');
+					this.$message.info('未登录，需要先登录')
 				}
+			},
+			goTest () {
+				this.$dialogFactory.open({some: 1})
+					.then(result => {
+						console.log(result)
+					})
 			}
 		}
 	}
