@@ -1,16 +1,15 @@
-import DefaultDialog from './default-dialog'
-
 import Vue from 'vue'
-console.log(DefaultDialog)
-Vue.component('default-dialog', DefaultDialog)
-const Instance = Vue.component('default-dialog')
 
+const componentMap = {}
 const dialogFactory = {
-	register() {
-		Vue.component('default-dialog', DefaultDialog)
+	register(name, component) {
+		Vue.component(name, component)
+		componentMap[name] = Vue.component(name)
 	},
-	open(data) {
+	open(name, data) {
+		const Instance = componentMap[name]
 		let instance = new Instance()
+		console.log(instance)
 		instance.$mount()
 		const p = instance.open(data)
 		document.body.appendChild(instance.$el)

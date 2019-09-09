@@ -10,11 +10,14 @@
 
 <script>
 	import IndexHeader from './index/index-header'
-
+	import LoginDialog from '../components/login-dialog'
 	export default {
 		name: 'index',
 		components: {
 			IndexHeader
+		},
+		created() {
+			this.$dialogFactory.register('LoginDialog', LoginDialog)
 		},
 		methods: {
 			goDbSketch() {
@@ -27,7 +30,7 @@
 				}
 			},
 			goTest () {
-				this.$dialogFactory.open({some: 1})
+				this.$dialogFactory.open('LoginDialog', {some: 1})
 					.then(result => {
 						console.log(result)
 					})

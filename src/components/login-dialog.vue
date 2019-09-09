@@ -1,22 +1,17 @@
 <template lang='pug'>
 	el-dialog.default-dialog(:visible.sync='show')
-		el-button some
+		el-button demo
 </template>
 
 <script>
-	import Base from './base'
+	import Base from '../../package/dialog-factory/base'
 	export default {
 		extends: Base,
-		name: 'default-dialog',
-		data() {
-			return {
-
-			}
-		}
+		name: 'login-dialog'
 	}
 </script>
 <style lang="scss" scoped>
-	.default-dialog {
+	.login-dialog {
 
 	}
 </style>
